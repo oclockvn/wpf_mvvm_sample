@@ -12,21 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using UI.Pages;
 
-namespace UI
+namespace UI.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EmployeePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EmployeePage : Page
     {
-        public MainWindow()
+        public EmployeePage()
         {
             InitializeComponent();
-
-            // todo: refactor using navigation service
-            root.Navigate(new LoginPage());
         }
     }
 }
