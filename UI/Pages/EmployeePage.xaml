@@ -12,6 +12,10 @@
       xmlns:m="clr-namespace:Core.Models;assembly=Core"
       d:DataContext="{d:DesignInstance vm:EmployeeViewModel, IsDesignTimeCreatable=True}">
 
+  <Page.Resources>
+    <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+  </Page.Resources>
+
   <Grid x:Name="main">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="6*" />
@@ -33,7 +37,7 @@
 
         <Button Content="Add Employee"
                 HorizontalAlignment="Right"
-                Command="{Binding ViewEmployeeCommand}"/>
+                Command="{Binding ViewEmployeeCommand}" />
       </Grid>
 
       <!-- list -->
@@ -74,7 +78,7 @@
                       Padding="8,4"
                       Content="View"
                       Command="{Binding Source={x:Reference main}, Path=DataContext.ViewEmployeeCommand}"
-                      CommandParameter="{Binding Id}"/>
+                      CommandParameter="{Binding Id}" />
             </Grid>
 
           </DataTemplate>
@@ -85,32 +89,36 @@
     <!-- employee detail -->
     <StackPanel Grid.Column="1"
                 Margin="8,0,8,0"
-                Orientation="Vertical">
+                Orientation="Vertical"
+                IsEnabled="{Binding HasSelectedEmployee}">
       <Label Content="First name" />
-      <TextBox />
+      <TextBox Text="{Binding SelectedEmployee.FirstName}" />
 
       <Label Content="Last name" />
-      <TextBox />
+      <TextBox Text="{Binding SelectedEmployee.LastName}" />
 
       <Label Content="Email" />
-      <TextBox />
+      <TextBox Text="{Binding SelectedEmployee.Email}" />
 
       <Label Content="Phone" />
-      <TextBox />
+      <TextBox Text="{Binding SelectedEmployee.Phone}" />
 
       <Label Content="Gender" />
       <ComboBox HorizontalAlignment="Left"
                 MinWidth="200" />
 
       <CheckBox Content="Remote employee"
-                Margin="0,8,0,0" />
-      <StackPanel Orientation="Vertical">
+                Margin="0,8,0,0"
+                IsChecked="{Binding SelectedEmployee.IsRemote}" />
+      <StackPanel Orientation="Vertical"
+                  Visibility="{Binding SelectedEmployee.IsRemote, Converter={StaticResource booleanToVisibilityConverter}}">
         <Label Content="Location" />
-        <TextBox />
+        <TextBox Text="{Binding SelectedEmployee.RemoteLocation}" />
       </StackPanel>
 
       <Button Content="Save"
-              Margin="0,16,0,0" />
+              Margin="0,16,0,0"
+              Command="{Binding SaveEmployeeCommand}"/>
     </StackPanel>
 
   </Grid>

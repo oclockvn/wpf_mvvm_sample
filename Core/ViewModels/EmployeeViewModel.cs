@@ -1,22 +1,20 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Core.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.ViewModels
 {
     public partial class EmployeeViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<Employee> employees = new();
+        private ObservableCollection<Employee> _employees = new();
 
         [ObservableProperty]
-        private Employee selectedEmployee;
+        [NotifyPropertyChangedFor(nameof(HasSelectedEmployee))]
+        private Employee _selectedEmployee;
+
+        public bool HasSelectedEmployee => SelectedEmployee != null;
 
         public EmployeeViewModel()
         {
@@ -33,13 +31,14 @@ namespace Core.ViewModels
         [RelayCommand]
         private async Task SaveEmployeeAsync()
         {
-
+            var updatingEmplyee = Employees.Single(e => e.Id == SelectedEmployee.Id);
+            updatingEmplyee.Update(SelectedEmployee);
         }
 
         [RelayCommand]
         private async Task ViewEmployeeAsync(int id)
         {
-
+            SelectedEmployee = new Employee(Employees.Single(e => e.Id == id));
         }
 
         [RelayCommand]
