@@ -7,20 +7,24 @@
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="LoginPage">
+      Title="LoginPage"
+      xmlns:vm="clr-namespace:Core.ViewModels;assembly=Core"
+      d:DataContext="{d:DesignInstance vm:LoginViewModel, IsDesignTimeCreatable=True}">
 
   <StackPanel Orientation="Vertical"
               MaxWidth="350"
               VerticalAlignment="Center">
+
     <Label Content="Username" />
-    <TextBox />
+    <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
 
     <Label Content="Password"
            Margin="0,8,0,0" />
-    <TextBox />
+    <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
 
     <Button Content="Login"
             x:Name="loginButton"
-            Margin="0,16,0,0" />
+            Margin="0,16,0,0"
+            Command="{Binding LoginCommand}" />
   </StackPanel>
 </Page>

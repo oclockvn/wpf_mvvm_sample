@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace UI.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
+        // todo: refactor using DI
+        LoginViewModel vm = new LoginViewModel();
+
         public LoginPage()
         {
             InitializeComponent();
+
+            DataContext = vm;
 
             loginButton.Click += (s, args) =>
             {
