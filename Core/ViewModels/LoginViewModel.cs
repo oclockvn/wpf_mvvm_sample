@@ -17,6 +17,7 @@ namespace Core.ViewModels
         private async Task LoginAsync()
         {
             // do login
+            await Task.Delay(10);
 
             // nav to employee page
         }

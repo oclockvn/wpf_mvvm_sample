@@ -7,7 +7,10 @@
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="EmployeePage">
+      Title="EmployeePage"
+      xmlns:vm="clr-namespace:Core.ViewModels;assembly=Core"
+      xmlns:m="clr-namespace:Core.Models;assembly=Core"
+      d:DataContext="{d:DesignInstance vm:EmployeeViewModel, IsDesignTimeCreatable=True}">
 
   <Grid>
     <Grid.ColumnDefinitions>
@@ -35,7 +38,44 @@
       <!-- list -->
       <ListView Grid.Row="1"
                 Margin="0,8,0,0"
-                VerticalAlignment="Stretch">
+                VerticalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                ItemsSource="{Binding Employees}">
+        <ListView.ItemTemplate>
+          <DataTemplate DataType="{x:Type m:Employee}">
+            <Grid HorizontalAlignment="Stretch">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+
+              <TextBlock Grid.Row="0"
+                         Grid.Column="0">
+                  <Run Text="{Binding FirstName, Mode=OneWay}" />
+                  <Run Text="{Binding LastName, Mode=OneWay}" />
+              </TextBlock>
+
+              <TextBlock Grid.Row="1"
+                         Grid.Column="0">
+                  <Run Text="{Binding Phone, Mode=OneWay, StringFormat={}P: {0}}" />
+                  <Run Text="/" />
+                  <Run Text="{Binding Email, Mode=OneWay, StringFormat={}E: {0}}" />
+              </TextBlock>
+
+              <Button Grid.Column="1"
+                      Grid.RowSpan="2"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      Padding="8,4"
+                      Content="View" />
+            </Grid>
+
+          </DataTemplate>
+        </ListView.ItemTemplate>
       </ListView>
     </Grid>
 
