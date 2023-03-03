@@ -4,6 +4,8 @@ namespace Core.Models
 {
     public partial class Employee : ObservableObject
     {
+        public int Id { get; set; }
+
         [ObservableProperty]
         private string firstName;
 

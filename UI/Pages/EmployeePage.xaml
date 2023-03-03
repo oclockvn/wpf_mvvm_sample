@@ -12,7 +12,7 @@
       xmlns:m="clr-namespace:Core.Models;assembly=Core"
       d:DataContext="{d:DesignInstance vm:EmployeeViewModel, IsDesignTimeCreatable=True}">
 
-  <Grid>
+  <Grid x:Name="main">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="6*" />
       <ColumnDefinition Width="4*" />
@@ -32,7 +32,8 @@
                FontWeight="DemiBold" />
 
         <Button Content="Add Employee"
-                HorizontalAlignment="Right" />
+                HorizontalAlignment="Right"
+                Command="{Binding ViewEmployeeCommand}"/>
       </Grid>
 
       <!-- list -->
@@ -71,7 +72,9 @@
                       HorizontalAlignment="Right"
                       VerticalAlignment="Center"
                       Padding="8,4"
-                      Content="View" />
+                      Content="View"
+                      Command="{Binding Source={x:Reference main}, Path=DataContext.ViewEmployeeCommand}"
+                      CommandParameter="{Binding Id}"/>
             </Grid>
 
           </DataTemplate>
