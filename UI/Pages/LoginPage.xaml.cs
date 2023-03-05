@@ -13,7 +13,5 @@ namespace UI.Pages
             DataContext = vm;
             InitializeComponent();
         }
-
     }
-
 }

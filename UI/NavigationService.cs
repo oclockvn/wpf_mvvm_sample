@@ -12,9 +12,9 @@ namespace UI
     {
         public void NavigateTo(PageRoute page)
         {
-            Page content = null;
             var serviceProvider = (Application.Current as App).Host.Services;
 
+            Page content;
             switch (page)
             {
                 case PageRoute.Login:
