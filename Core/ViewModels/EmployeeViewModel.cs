@@ -1,12 +1,20 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Core.Models;
+using Core.Services;
 using System.Collections.ObjectModel;
 
 namespace Core.ViewModels
 {
     public partial class EmployeeViewModel : ObservableObject
     {
+        private readonly IEmployeeService employeeService;
+
+        public EmployeeViewModel(IEmployeeService employeeService)
+        {
+            this.employeeService = employeeService;
+        }
+
         [ObservableProperty]
         private ObservableCollection<Employee> _employees = new();
 
@@ -33,11 +41,13 @@ namespace Core.ViewModels
         {
             if (SelectedEmployee.Id == 0)
             {
+                // todo: call service
                 SelectedEmployee.Id = Employees.Count + 1;
                 Employees.Add(SelectedEmployee);
             }
             else
             {
+                // todo: call service
                 var updatingEmplyee = Employees.Single(e => e.Id == SelectedEmployee.Id);
                 updatingEmplyee.Update(SelectedEmployee);
             }

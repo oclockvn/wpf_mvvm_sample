@@ -8,9 +8,9 @@ namespace UI.Pages
     /// </summary>
     public partial class EmployeePage : Page
     {
-        EmployeeViewModel vm = new();
+        //EmployeeViewModel vm = new();
 
-        public EmployeePage()
+        public EmployeePage(EmployeeViewModel vm)
         {
             DataContext = vm;
             InitializeComponent();
