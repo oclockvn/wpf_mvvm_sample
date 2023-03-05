@@ -37,7 +37,7 @@
 
         <Button Content="Add Employee"
                 HorizontalAlignment="Right"
-                Command="{Binding ViewEmployeeCommand}" />
+                Command="{Binding AddEmployeeCommand}" />
       </Grid>
 
       <!-- list -->

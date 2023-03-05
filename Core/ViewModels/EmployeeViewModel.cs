@@ -25,14 +25,22 @@ namespace Core.ViewModels
         [RelayCommand]
         private void AddEmployee()
         {
-
+            SelectedEmployee = new();
         }
 
         [RelayCommand]
         private async Task SaveEmployeeAsync()
         {
-            var updatingEmplyee = Employees.Single(e => e.Id == SelectedEmployee.Id);
-            updatingEmplyee.Update(SelectedEmployee);
+            if (SelectedEmployee.Id == 0)
+            {
+                SelectedEmployee.Id = Employees.Count + 1;
+                Employees.Add(SelectedEmployee);
+            }
+            else
+            {
+                var updatingEmplyee = Employees.Single(e => e.Id == SelectedEmployee.Id);
+                updatingEmplyee.Update(SelectedEmployee);
+            }
         }
 
         [RelayCommand]
