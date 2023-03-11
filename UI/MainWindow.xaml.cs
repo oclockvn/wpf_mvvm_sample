@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using UI.Pages;
@@ -12,8 +13,9 @@ namespace UI
     {
         //private readonly INavigationService navigationService;
 
-        public MainWindow()
+        public MainWindow(MainViewModel vm)
         {
+            DataContext = vm;
             InitializeComponent();
 
             //this.navigationService = navigationService;

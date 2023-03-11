@@ -24,11 +24,11 @@ namespace Core.ViewModels
 
         public bool HasSelectedEmployee => SelectedEmployee != null;
 
-        public EmployeeViewModel()
-        {
-            // todo: refactor using behavior
-            InitAsync().GetAwaiter().GetResult();
-        }
+        //public EmployeeViewModel()
+        //{
+        //    // todo: refactor using behavior
+        //    InitAsync().GetAwaiter().GetResult();
+        //}
 
         [RelayCommand]
         private void AddEmployee()

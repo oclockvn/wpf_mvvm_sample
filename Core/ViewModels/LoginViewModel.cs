@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Core.Services;
 
 namespace Core.ViewModels
@@ -8,11 +9,16 @@ namespace Core.ViewModels
     {
         private readonly IAuthService authService;
         private readonly INavigationService navigationService;
+        private readonly IMessenger messenger;
 
-        public LoginViewModel(IAuthService authService, INavigationService navigationService)
+        public LoginViewModel(
+            IAuthService authService,
+            INavigationService navigationService,
+            IMessenger messenger)
         {
             this.authService = authService;
             this.navigationService = navigationService;
+            this.messenger = messenger;
         }
 
         [ObservableProperty]
@@ -37,6 +43,12 @@ namespace Core.ViewModels
             }
             else
             {
+                messenger.Send(new LoginMessage(new LogInUser
+                {
+                    Username = UserName,
+                    Authenticated = true,
+                }));
+
                 // nav to employee list
                 navigationService.NavigateTo(PageRoute.Employee);
             }

@@ -1,4 +1,5 @@
-﻿using Core.Services;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Core.Services;
 using Core.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,8 +12,10 @@ namespace Core
             return services
                 .AddScoped<LoginViewModel>()
                 .AddScoped<EmployeeViewModel>()
+                .AddScoped<MainViewModel>()
                 .AddScoped<IAuthService, AuthService>()
                 .AddScoped<IEmployeeService, EmployeeService>()
+                .AddScoped<IMessenger, WeakReferenceMessenger>()
                 ;
         }
     }
