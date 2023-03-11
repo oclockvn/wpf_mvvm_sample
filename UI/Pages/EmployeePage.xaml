@@ -52,7 +52,14 @@
                 Margin="0,8,0,0"
                 VerticalAlignment="Stretch"
                 HorizontalContentAlignment="Stretch"
-                ItemsSource="{Binding Employees}">
+                ItemsSource="{Binding Employees}"
+                SelectedItem="{Binding UiSelectedItem}">
+        <behavior:Interaction.Triggers>
+          <behavior:EventTrigger EventName="SelectionChanged">
+            <behavior:InvokeCommandAction Command="{Binding ViewSelectedCommand}" />
+          </behavior:EventTrigger>
+        </behavior:Interaction.Triggers>
+
         <ListView.ItemTemplate>
           <DataTemplate DataType="{x:Type m:Employee}">
             <Grid HorizontalAlignment="Stretch">
@@ -112,7 +119,9 @@
 
       <Label Content="Gender" />
       <ComboBox HorizontalAlignment="Left"
-                MinWidth="200" />
+                MinWidth="200">
+
+      </ComboBox>
 
       <CheckBox Content="Remote employee"
                 Margin="0,8,0,0"
@@ -125,7 +134,7 @@
 
       <Button Content="Save"
               Margin="0,16,0,0"
-              Command="{Binding SaveEmployeeCommand}"/>
+              Command="{Binding SaveEmployeeCommand}" />
     </StackPanel>
 
   </Grid>

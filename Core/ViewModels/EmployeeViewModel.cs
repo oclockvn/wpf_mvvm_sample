@@ -12,7 +12,7 @@ namespace Core.ViewModels
 
         public EmployeeViewModel()
         {
-            
+
         }
 
         public EmployeeViewModel(IEmployeeService employeeService)
@@ -28,6 +28,9 @@ namespace Core.ViewModels
         private Employee _selectedEmployee;
 
         public bool HasSelectedEmployee => SelectedEmployee != null;
+
+        [ObservableProperty]
+        private Employee uiSelectedItem;
 
         //public EmployeeViewModel()
         //{
@@ -62,6 +65,14 @@ namespace Core.ViewModels
         private async Task ViewEmployeeAsync(int id)
         {
             SelectedEmployee = new Employee(Employees.Single(e => e.Id == id));
+            await Task.CompletedTask;
+        }
+
+        [RelayCommand]
+        private async Task ViewSelected()
+        {
+            if (UiSelectedItem != null)
+                await ViewEmployeeAsync(UiSelectedItem.Id);
         }
 
         [RelayCommand]
