@@ -10,11 +10,18 @@
       Title="EmployeePage"
       xmlns:vm="clr-namespace:Core.ViewModels;assembly=Core"
       xmlns:m="clr-namespace:Core.Models;assembly=Core"
+      xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
       d:DataContext="{d:DesignInstance vm:EmployeeViewModel, IsDesignTimeCreatable=True}">
 
   <Page.Resources>
     <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
   </Page.Resources>
+
+  <behavior:Interaction.Triggers>
+    <behavior:EventTrigger EventName="Loaded">
+      <behavior:InvokeCommandAction Command="{Binding InitCommand}" />
+    </behavior:EventTrigger>
+  </behavior:Interaction.Triggers>
 
   <Grid x:Name="main">
     <Grid.ColumnDefinitions>

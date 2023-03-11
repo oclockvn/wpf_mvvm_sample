@@ -10,6 +10,11 @@ namespace Core.ViewModels
     {
         private readonly IEmployeeService employeeService;
 
+        public EmployeeViewModel()
+        {
+            
+        }
+
         public EmployeeViewModel(IEmployeeService employeeService)
         {
             this.employeeService = employeeService;
@@ -62,19 +67,8 @@ namespace Core.ViewModels
         [RelayCommand]
         private async Task InitAsync()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                Employees.Add(new Employee
-                {
-                    Id = i,
-                    FirstName = "First " + i,
-                    LastName = "Last " + i,
-                    Email = $"first_last_{i}@example.com",
-                    IsRemote = i % 2 == 0,
-                    Phone = "01234568" + i,
-                    Gender = i % 2 == 0 ? "Male" : "Female",
-                });
-            }
+            var list = await employeeService.GetEmployeesAsync();
+            Employees = new ObservableCollection<Employee>(list);
         }
     }
 }

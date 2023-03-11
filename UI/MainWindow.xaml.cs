@@ -13,6 +13,11 @@ namespace UI
     {
         //private readonly INavigationService navigationService;
 
+        public MainWindow()
+        {
+            
+        }
+
         public MainWindow(MainViewModel vm)
         {
             DataContext = vm;
